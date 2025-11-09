@@ -1,0 +1,21 @@
+{
+  "name": "astro-686f6c61-template",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Astro 686f6c61 Template - A minimalist portfolio template with terminal-inspired design",
+  "author": "Your Name",
+  "license": "MIT",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.15.3"
+  },
+  "devDependencies": {
+    "serve": "^14.2.5",
+    "terser": "^5.44.0"
+  }
+}
