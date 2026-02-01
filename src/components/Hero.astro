@@ -1,54 +1,14 @@
 ---
-/**
- * COMPONENTE: Hero
- * ================
- *
- * Sección principal de presentación del portfolio.
- * Primera sección que ven los visitantes al llegar al sitio.
- *
- * PROPÓSITO:
- * - Presentación personal con nombre, título y descripción
- * - Call-to-action (CTA) para ver proyectos
- * - Botón para acceder al template en GitHub
- * - Crear una primera impresión profesional
- *
- * CONTENIDO MOSTRADO:
- * - Saludo (ej: "Hola, soy")
- * - Nombre/Título principal con cursor parpadeante
- * - Subtítulo (ej: "Desarrollador Full Stack")
- * - Descripción breve de skills y experiencia
- * - Botones CTA (Ver proyectos + Ver template)
- *
- * ARQUITECTURA:
- * - HTML: Contenido semántico con <section>, <h1>, etc.
- * - CSS: Diseño minimalista con animaciones sutiles
- * - Internacionalización: Todo el contenido viene de translations.ts
- * - Responsive: Se adapta perfectamente a móvil
- *
- * ANIMACIONES:
- * - Cursor parpadeante (_) al final del título
- * - Animación fade-in al cargar (definida en global.css)
- * - Efecto hover en botones con movimiento
- *
- * PERSONALIZACIÓN:
- * - NO modificar este archivo
- * - Todo el contenido se edita en: src/i18n/translations.ts
- * - Busca las claves: heroGreeting, heroTitle, heroSubtitle, etc.
- */
-
-// IMPORTACIONES
-// -------------
-// Utilidad de internacionalización para obtener traducciones
-import { useI18n } from '../lib/i18n.js';
+import { useI18n } from "../lib/i18n.js";
 
 // PROPS
 // -----
 interface Props {
-  lang?: string;  // Idioma de la página ('es' o 'en')
+  lang?: string; // Idioma de la página ('es' o 'en')
 }
 
 // Obtiene props con valores por defecto
-const { lang = 'es' } = Astro.props;
+const { lang = "es" } = Astro.props;
 
 // TRADUCCIONES
 // ------------
@@ -57,32 +17,6 @@ const { lang = 'es' } = Astro.props;
 const { t } = useI18n(lang);
 ---
 
-<!--
-  SECCIÓN HERO
-  ============
-
-  ESTRUCTURA HTML:
-  - <section>: Contenedor principal semántico
-  - .container: Clase para centrar contenido (definida en global.css)
-  - .hero-content: Contenedor del contenido con max-width
-  - .fade-in: Animación de aparición al cargar (global.css)
-
-  ELEMENTOS:
-  1. Saludo: Texto pequeño introductorio
-  2. Título (h1): Nombre con cursor parpadeante
-  3. Subtítulo: Tu rol o especialidad
-  4. Descripción: Breve resumen de skills/experiencia (soporta HTML)
-  5. CTAs: Botones de acción (proyectos + template)
-
-  CLASES MONO:
-  - .mono: Aplica fuente monoespaciada (definida en global.css)
-  - Usada en casi todos los textos para estilo de terminal/código
-
-  SEO:
-  - <h1> es el título principal de la página (crítico para SEO)
-  - Solo debe haber un <h1> por página
-  - El contenido es el más importante para Google
--->
 <section class="hero">
   <!-- Contenedor centrado (global.css) -->
   <div class="container">
@@ -114,7 +48,7 @@ const { t } = useI18n(lang);
         - set:html permite HTML en el texto (ej: <br>, <strong>)
         - Cuidado: Solo usar con contenido confiable (no input de usuario)
       -->
-      <p class="description mono" set:html={t.heroDescription}></p>
+      <p class="description mono" set:html={t.heroDescription} />
 
       <!--
         CALL TO ACTIONS (CTAs):
@@ -139,7 +73,12 @@ const { t } = useI18n(lang);
           PERSONALIZAR:
           Cambia "yourusername/your-template-repo" por tu repo real
         -->
-        <a href="https://github.com/yourusername/your-template-repo" target="_blank" rel="noopener" class="btn-secondary mono">{t.heroTemplateButton}</a>
+        <a
+          href="#contact"
+          target="_blank"
+          rel="noopener"
+          class="btn-secondary mono">{t.heroTemplateButton}</a
+        >
       </div>
     </div>
   </div>
@@ -178,10 +117,10 @@ const { t } = useI18n(lang);
    * Sección principal que ocupa casi toda la altura de la ventana
    */
   .hero {
-    min-height: 90vh;     /* 90% de altura de ventana */
-    display: flex;        /* Flexbox para centrar verticalmente */
-    align-items: center;  /* Centra contenido verticalmente */
-    padding: 6rem 0;      /* 96px arriba y abajo */
+    min-height: 90vh; /* 90% de altura de ventana */
+    display: flex; /* Flexbox para centrar verticalmente */
+    align-items: center; /* Centra contenido verticalmente */
+    padding: 6rem 0; /* 96px arriba y abajo */
   }
 
   /**
@@ -191,7 +130,7 @@ const { t } = useI18n(lang);
    * Texto muy ancho (>800px) es difícil de leer
    */
   .hero-content {
-    max-width: 800px;  /* Ancho máximo para legibilidad óptima */
+    max-width: 800px; /* Ancho máximo para legibilidad óptima */
   }
 
   /**
@@ -201,9 +140,9 @@ const { t } = useI18n(lang);
    * Opacidad reducida para menor jerarquía visual
    */
   .greeting {
-    font-size: 0.9rem;      /* 14.4px - Ligeramente pequeño */
-    opacity: 0.7;           /* 70% visible - Menos prominente */
-    margin-bottom: 0.5rem;  /* 8px de espacio debajo */
+    font-size: 0.9rem; /* 14.4px - Ligeramente pequeño */
+    opacity: 0.7; /* 70% visible - Menos prominente */
+    margin-bottom: 0.5rem; /* 8px de espacio debajo */
   }
 
   /**
@@ -213,7 +152,7 @@ const { t } = useI18n(lang);
    * Hereda estilos globales de h1 (global.css)
    */
   h1 {
-    margin-bottom: 1rem;  /* 16px de espacio debajo */
+    margin-bottom: 1rem; /* 16px de espacio debajo */
   }
 
   /**
@@ -223,7 +162,7 @@ const { t } = useI18n(lang);
    * Simula cursor de terminal escribiendo
    */
   .blink {
-    animation: blink 1s infinite;  /* Parpadea cada 1 segundo, infinitamente */
+    animation: blink 1s infinite; /* Parpadea cada 1 segundo, infinitamente */
   }
 
   /**
@@ -234,8 +173,14 @@ const { t } = useI18n(lang);
    * 51-100%: Invisible (opacity: 0)
    */
   @keyframes blink {
-    0%, 50% { opacity: 1; }    /* Primera mitad: visible */
-    51%, 100% { opacity: 0; }  /* Segunda mitad: invisible */
+    0%,
+    50% {
+      opacity: 1;
+    } /* Primera mitad: visible */
+    51%,
+    100% {
+      opacity: 0;
+    } /* Segunda mitad: invisible */
   }
 
   /**
@@ -245,9 +190,9 @@ const { t } = useI18n(lang);
    * Ligeramente más grande que texto normal
    */
   .subtitle {
-    font-size: 1.25rem;     /* 20px - Prominente pero no tanto como h1 */
-    margin-bottom: 1.5rem;  /* 24px de espacio debajo */
-    opacity: 0.8;           /* 80% visible - Jerarquía intermedia */
+    font-size: 1.25rem; /* 20px - Prominente pero no tanto como h1 */
+    margin-bottom: 1.5rem; /* 24px de espacio debajo */
+    opacity: 0.8; /* 80% visible - Jerarquía intermedia */
   }
 
   /**
@@ -257,9 +202,9 @@ const { t } = useI18n(lang);
    * Opacidad más baja que subtítulo para menor énfasis
    */
   .description {
-    font-size: 1.1rem;    /* 17.6px - Legible pero secundario */
-    margin-bottom: 2rem;  /* 32px de espacio debajo */
-    opacity: 0.7;         /* 70% visible - Menor jerarquía */
+    font-size: 1.1rem; /* 17.6px - Legible pero secundario */
+    margin-bottom: 2rem; /* 32px de espacio debajo */
+    opacity: 0.7; /* 70% visible - Menor jerarquía */
   }
 
   /**
@@ -270,10 +215,10 @@ const { t } = useI18n(lang);
    */
   .terminal-info {
     display: block;
-    font-size: 0.9rem;    /* 14.4px - Pequeño */
-    opacity: 0.6;         /* 60% visible - Muy secundario */
-    margin-top: 0.5rem;   /* 8px arriba */
-    font-style: italic;   /* Cursiva para diferenciar */
+    font-size: 0.9rem; /* 14.4px - Pequeño */
+    opacity: 0.6; /* 60% visible - Muy secundario */
+    margin-top: 0.5rem; /* 8px arriba */
+    font-style: italic; /* Cursiva para diferenciar */
   }
 
   /**
@@ -283,9 +228,9 @@ const { t } = useI18n(lang);
    * Flexbox para alinear botones horizontalmente
    */
   .cta {
-    display: flex;        /* Flexbox para layout horizontal */
-    gap: 1rem;            /* 16px de espacio entre botones */
-    flex-wrap: wrap;      /* Permite wrap en pantallas pequeñas */
+    display: flex; /* Flexbox para layout horizontal */
+    gap: 1rem; /* 16px de espacio entre botones */
+    flex-wrap: wrap; /* Permite wrap en pantallas pequeñas */
   }
 
   /**
@@ -296,12 +241,12 @@ const { t } = useI18n(lang);
    */
   .btn-primary,
   .btn-secondary {
-    padding: 0.75rem 2rem;          /* 12px vertical, 32px horizontal */
-    border: 2px solid var(--text);  /* Borde adaptable al tema */
-    transition: all 0.3s;           /* Animación suave 300ms */
+    padding: 0.75rem 2rem; /* 12px vertical, 32px horizontal */
+    border: 2px solid var(--text); /* Borde adaptable al tema */
+    transition: all 0.3s; /* Animación suave 300ms */
     display: inline-block;
-    font-family: var(--mono);       /* Fuente monoespaciada */
-    font-size: 0.9rem;              /* 14.4px */
+    font-family: var(--mono); /* Fuente monoespaciada */
+    font-size: 0.9rem; /* 14.4px */
   }
 
   /**
@@ -311,9 +256,9 @@ const { t } = useI18n(lang);
    * Mayor jerarquía visual (acción principal)
    */
   .btn-primary {
-    background: var(--text);  /* Fondo del color del texto (invertido) */
-    color: var(--bg);         /* Texto del color del fondo (invertido) */
-    border-bottom: none;      /* Sin borde inferior */
+    background: var(--text); /* Fondo del color del texto (invertido) */
+    color: var(--bg); /* Texto del color del fondo (invertido) */
+    border-bottom: none; /* Sin borde inferior */
   }
 
   /**
@@ -322,8 +267,8 @@ const { t } = useI18n(lang);
    * Efecto al pasar el mouse
    */
   .btn-primary:hover {
-    opacity: 1;                   /* Opacidad total */
-    transform: translateY(-2px);  /* Levanta 2px hacia arriba */
+    opacity: 1; /* Opacidad total */
+    transform: translateY(-2px); /* Levanta 2px hacia arriba */
   }
 
   /**
@@ -333,7 +278,7 @@ const { t } = useI18n(lang);
    * Menor jerarquía visual (acción secundaria)
    */
   .btn-secondary {
-    background: transparent;  /* Fondo transparente, solo borde */
+    background: transparent; /* Fondo transparente, solo borde */
   }
 
   /**
@@ -342,9 +287,9 @@ const { t } = useI18n(lang);
    * Efecto al pasar el mouse: se rellena con color
    */
   .btn-secondary:hover {
-    background: var(--text);  /* Se rellena con color del texto */
-    color: var(--bg);         /* Texto cambia a color de fondo */
-    opacity: 1;               /* Opacidad total */
+    background: var(--text); /* Se rellena con color del texto */
+    color: var(--bg); /* Texto cambia a color de fondo */
+    opacity: 1; /* Opacidad total */
   }
 
   /**
@@ -358,7 +303,7 @@ const { t } = useI18n(lang);
      * Aprovecha mejor el espacio vertical limitado
      */
     .hero {
-      min-height: 80vh;  /* 80% de altura (antes 90%) */
+      min-height: 80vh; /* 80% de altura (antes 90%) */
     }
 
     /**
@@ -366,7 +311,7 @@ const { t } = useI18n(lang);
      * Mejor para pantallas estrechas
      */
     .cta {
-      flex-direction: column;  /* Cambia de fila a columna */
+      flex-direction: column; /* Cambia de fila a columna */
     }
 
     /**
@@ -375,7 +320,7 @@ const { t } = useI18n(lang);
      */
     .btn-primary,
     .btn-secondary {
-      text-align: center;  /* Centra el texto del botón */
+      text-align: center; /* Centra el texto del botón */
     }
   }
 </style>

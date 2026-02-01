@@ -55,7 +55,7 @@ export interface I18nProps {
  * console.log(isEnglish);     // true
  * ```
  */
-export function useI18n(lang: string = 'es') {
+export function useI18n(lang: string = 'en') {
   // Obtiene el objeto de traducciones correspondiente al idioma
   const t = getTranslations(lang);
 

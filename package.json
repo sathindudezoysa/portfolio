@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Astro 686f6c61 Template - A minimalist portfolio template with terminal-inspired design",
-  "author": "Your Name",
+  "author": "Sathindu",
   "license": "MIT",
   "scripts": {
     "dev": "astro dev",

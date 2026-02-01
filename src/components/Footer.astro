@@ -40,16 +40,16 @@
 // IMPORTACIONES
 // -------------
 // Utilidad de internacionalización para obtener traducciones
-import { useI18n } from '../lib/i18n.js';
+import { useI18n } from "../lib/i18n.js";
 
 // PROPS
 // -----
 interface Props {
-  lang?: string;  // Idioma de la página ('es' o 'en')
+  lang?: string; // Idioma de la página ('es' o 'en')
 }
 
 // Obtiene props con valores por defecto
-const { lang = 'es' } = Astro.props;
+const { lang = "es" } = Astro.props;
 
 // TRADUCCIONES
 // ------------
@@ -80,9 +80,11 @@ const currentYear = new Date().getFullYear();
  * { name: "CodePen", url: "https://codepen.io/yourusername" }
  */
 const socialLinks = [
-  { name: "GitHub", url: "https://github.com/yourusername" },      // Repositorios de código
-  { name: "Twitter", url: "https://twitter.com/yourusername" },    // Red social / X
-  { name: "LinkedIn", url: "https://linkedin.com/in/yourusername" } // Red profesional
+  { name: "GitHub", url: "https://github.com/sathindudezoysa" }, // Repositorios de código
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/sathindu-dhanushka-de-zoysa-686b43267/",
+  }, // Red profesional
 ];
 ---
 
@@ -138,7 +140,11 @@ const socialLinks = [
           - El script lo muestra y rellena con el email
           - #email-text se llenará dinámicamente con un link mailto:
         -->
-        <div class="email-display mono" id="email-display" style="display: none;">
+        <div
+          class="email-display mono"
+          id="email-display"
+          style="display: none;"
+        >
           <span class="email-link" id="email-text"></span>
         </div>
       </div>
@@ -158,11 +164,13 @@ const socialLinks = [
           - Cada link abre en nueva pestaña (target="_blank")
         -->
         <nav class="social-links">
-          {socialLinks.map(link => (
-            <a href={link.url} target="_blank" rel="noopener noreferrer">
-              {link.name}
-            </a>
-          ))}
+          {
+            socialLinks.map((link) => (
+              <a href={link.url} target="_blank" rel="noopener noreferrer">
+                {link.name}
+              </a>
+            ))
+          }
         </nav>
       </div>
     </div>
@@ -179,7 +187,7 @@ const socialLinks = [
         - Ejemplo: "© {year} Tu Nombre" → "© 2025 Tu Nombre"
       -->
       <p class="mono">
-        {t.footerCopyright.replace('{year}', currentYear.toString())}
+        {t.footerCopyright.replace("{year}", currentYear.toString())}
       </p>
 
       <!--
@@ -190,7 +198,8 @@ const socialLinks = [
         - Ejemplo: "Disponible para proyectos"
       -->
       <p class="mono">
-        <span class="status">●</span> {t.footerStatus}
+        <span class="status">●</span>
+        {t.footerStatus}
       </p>
     </div>
   </div>
@@ -224,8 +233,8 @@ const socialLinks = [
    * Espaciado del pie de página
    */
   .footer {
-    padding: 4rem 0 2rem;  /* 64px arriba, 32px abajo */
-    margin-top: 4rem;      /* 64px de separación con contenido previo */
+    padding: 4rem 0 2rem; /* 64px arriba, 32px abajo */
+    margin-top: 4rem; /* 64px de separación con contenido previo */
   }
 
   /**
@@ -236,9 +245,9 @@ const socialLinks = [
    */
   .footer-content {
     display: grid;
-    grid-template-columns: 2fr 1fr;  /* Columna izq 2x más ancha que derecha */
-    gap: 4rem;                       /* 64px de espacio entre columnas */
-    margin-bottom: 3rem;             /* 48px de espacio debajo */
+    grid-template-columns: 2fr 1fr; /* Columna izq 2x más ancha que derecha */
+    gap: 4rem; /* 64px de espacio entre columnas */
+    margin-bottom: 3rem; /* 48px de espacio debajo */
   }
 
   /**
@@ -247,7 +256,7 @@ const socialLinks = [
    * Espaciado del título "Contacto"
    */
   .footer-main h2 {
-    margin-bottom: 1rem;  /* 16px de espacio debajo */
+    margin-bottom: 1rem; /* 16px de espacio debajo */
   }
 
   /**
@@ -258,14 +267,14 @@ const socialLinks = [
    */
   .reveal-email {
     background: transparent;
-    border: 2px solid var(--border);   /* Borde adaptable al tema */
-    color: var(--text);                /* Color adaptable al tema */
-    padding: 0.75rem 1.5rem;           /* 12px vertical, 24px horizontal */
-    cursor: pointer;                   /* Indica que es clickeable */
-    transition: all 0.3s;              /* Animación suave 300ms */
-    font-family: var(--mono);          /* Fuente monoespaciada */
-    font-size: 0.9rem;                 /* 14.4px */
-    margin-bottom: 1rem;               /* 16px de espacio debajo */
+    border: 2px solid var(--border); /* Borde adaptable al tema */
+    color: var(--text); /* Color adaptable al tema */
+    padding: 0.75rem 1.5rem; /* 12px vertical, 24px horizontal */
+    cursor: pointer; /* Indica que es clickeable */
+    transition: all 0.3s; /* Animación suave 300ms */
+    font-family: var(--mono); /* Fuente monoespaciada */
+    font-size: 0.9rem; /* 14.4px */
+    margin-bottom: 1rem; /* 16px de espacio debajo */
   }
 
   /**
@@ -274,8 +283,8 @@ const socialLinks = [
    * Efecto al pasar el mouse
    */
   .reveal-email:hover {
-    border-color: var(--text);        /* Borde más prominente */
-    transform: translateY(-2px);      /* Levanta 2px hacia arriba */
+    border-color: var(--text); /* Borde más prominente */
+    transform: translateY(-2px); /* Levanta 2px hacia arriba */
   }
 
   /**
@@ -285,8 +294,8 @@ const socialLinks = [
    * Aparece con animación fadeIn al mostrarse
    */
   .email-display {
-    margin-top: 1rem;              /* 16px de espacio arriba */
-    animation: fadeIn 0.5s ease-in;  /* Animación de aparición */
+    margin-top: 1rem; /* 16px de espacio arriba */
+    animation: fadeIn 0.5s ease-in; /* Animación de aparición */
   }
 
   /**
@@ -297,12 +306,12 @@ const socialLinks = [
    */
   @keyframes fadeIn {
     from {
-      opacity: 0;                     /* Comienza invisible */
-      transform: translateY(-10px);   /* Comienza 10px arriba */
+      opacity: 0; /* Comienza invisible */
+      transform: translateY(-10px); /* Comienza 10px arriba */
     }
     to {
-      opacity: 1;                     /* Termina completamente visible */
-      transform: translateY(0);       /* Termina en posición original */
+      opacity: 1; /* Termina completamente visible */
+      transform: translateY(0); /* Termina en posición original */
     }
   }
 
@@ -313,8 +322,8 @@ const socialLinks = [
    * Destacado para que sea fácil de ver
    */
   .email-link {
-    font-size: 1.25rem;      /* 20px - Grande y visible */
-    font-weight: 500;        /* Semi-bold para destacar */
+    font-size: 1.25rem; /* 20px - Grande y visible */
+    font-weight: 500; /* Semi-bold para destacar */
     display: inline-block;
   }
 
@@ -325,9 +334,9 @@ const socialLinks = [
    * Más pequeño y con menos prominencia
    */
   .footer-links h3 {
-    font-size: 0.9rem;      /* 14.4px - Pequeño */
-    margin-bottom: 1rem;    /* 16px de espacio debajo */
-    opacity: 0.7;           /* 70% visible - Menos prominente */
+    font-size: 0.9rem; /* 14.4px - Pequeño */
+    margin-bottom: 1rem; /* 16px de espacio debajo */
+    opacity: 0.7; /* 70% visible - Menos prominente */
   }
 
   /**
@@ -337,8 +346,8 @@ const socialLinks = [
    */
   .social-links {
     display: flex;
-    flex-direction: column;  /* Vertical */
-    gap: 0.75rem;            /* 12px entre cada link */
+    flex-direction: column; /* Vertical */
+    gap: 0.75rem; /* 12px entre cada link */
   }
 
   /**
@@ -348,8 +357,8 @@ const socialLinks = [
    * Opacidad reducida por defecto, aumenta en hover
    */
   .social-links a {
-    opacity: 0.7;              /* 70% visible por defecto */
-    transition: opacity 0.2s;  /* Transición suave 200ms */
+    opacity: 0.7; /* 70% visible por defecto */
+    transition: opacity 0.2s; /* Transición suave 200ms */
   }
 
   /**
@@ -358,7 +367,7 @@ const socialLinks = [
    * Aumenta opacidad al pasar el mouse
    */
   .social-links a:hover {
-    opacity: 1;  /* 100% visible en hover */
+    opacity: 1; /* 100% visible en hover */
   }
 
   /**
@@ -368,13 +377,13 @@ const socialLinks = [
    * Separado visualmente con borde superior
    */
   .footer-bottom {
-    padding-top: 2rem;                    /* 32px de espacio arriba */
-    border-top: 1px solid var(--border);  /* Línea separadora */
+    padding-top: 2rem; /* 32px de espacio arriba */
+    border-top: 1px solid var(--border); /* Línea separadora */
     display: flex;
-    justify-content: space-between;       /* Copyright izq, status der */
-    align-items: center;                  /* Alineación vertical centrada */
-    font-size: 0.85rem;                   /* 13.6px - Pequeño */
-    opacity: 0.6;                         /* 60% visible - Información secundaria */
+    justify-content: space-between; /* Copyright izq, status der */
+    align-items: center; /* Alineación vertical centrada */
+    font-size: 0.85rem; /* 13.6px - Pequeño */
+    opacity: 0.6; /* 60% visible - Información secundaria */
   }
 
   /**
@@ -384,8 +393,8 @@ const socialLinks = [
    * Color verde con animación pulse
    */
   .status {
-    color: #00ff00;              /* Verde brillante (terminal green) */
-    animation: pulse 2s infinite;  /* Parpadea cada 2 segundos, infinitamente */
+    color: #00ff00; /* Verde brillante (terminal green) */
+    animation: pulse 2s infinite; /* Parpadea cada 2 segundos, infinitamente */
   }
 
   /**
@@ -395,8 +404,13 @@ const socialLinks = [
    * Simula indicador de "en línea" o "disponible"
    */
   @keyframes pulse {
-    0%, 100% { opacity: 1; }    /* Inicio y fin: completamente visible */
-    50% { opacity: 0.5; }       /* Mitad: semi-transparente */
+    0%,
+    100% {
+      opacity: 1;
+    } /* Inicio y fin: completamente visible */
+    50% {
+      opacity: 0.5;
+    } /* Mitad: semi-transparente */
   }
 
   /**
@@ -410,8 +424,8 @@ const socialLinks = [
      * En mobile, contacto y redes se apilan verticalmente
      */
     .footer-content {
-      grid-template-columns: 1fr;  /* 1 columna */
-      gap: 3rem;                   /* 48px entre secciones */
+      grid-template-columns: 1fr; /* 1 columna */
+      gap: 3rem; /* 48px entre secciones */
     }
 
     /**
@@ -419,9 +433,9 @@ const socialLinks = [
      * Copyright y status se apilan en mobile
      */
     .footer-bottom {
-      flex-direction: column;  /* De horizontal a vertical */
-      gap: 1rem;               /* 16px entre elementos */
-      text-align: center;      /* Texto centrado */
+      flex-direction: column; /* De horizontal a vertical */
+      gap: 1rem; /* 16px entre elementos */
+      text-align: center; /* Texto centrado */
     }
   }
 </style>
@@ -463,13 +477,13 @@ const socialLinks = [
   // EVENT LISTENER: DOMContentLoaded
   // ---------------------------------
   // Espera a que todo el HTML esté cargado antes de ejecutar
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     // REFERENCIAS AL DOM
     // ------------------
     // Encuentra los elementos necesarios por sus IDs
-    const revealButton = document.getElementById('reveal-email');  // Botón de revelar
-    const emailDisplay = document.getElementById('email-display');  // Contenedor del email
-    const emailText = document.getElementById('email-text');        // Span donde irá el link
+    const revealButton = document.getElementById("reveal-email"); // Botón de revelar
+    const emailDisplay = document.getElementById("email-display"); // Contenedor del email
+    const emailText = document.getElementById("email-text"); // Span donde irá el link
 
     // VALIDACIÓN
     // ----------
@@ -478,15 +492,15 @@ const socialLinks = [
       // EVENT LISTENER: Click en botón
       // -------------------------------
       // Se ejecuta cuando el usuario hace clic en "Revelar Email"
-      revealButton.addEventListener('click', () => {
+      revealButton.addEventListener("click", () => {
         // GOOGLE ANALYTICS
         // ----------------
         // Registra el evento de revelación de email
         // Solo si Google Analytics está configurado
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'reveal_email', {
-            event_category: 'contact',       // Categoría: Contacto
-            event_label: 'email_revealed'    // Etiqueta: Email revelado
+        if (typeof gtag !== "undefined") {
+          gtag("event", "reveal_email", {
+            event_category: "contact", // Categoría: Contacto
+            event_label: "email_revealed", // Etiqueta: Email revelado
           });
         }
 
@@ -514,17 +528,17 @@ const socialLinks = [
          * const user = atob('am9obi5kb2U=');
          * const domain = atob('Z21haWwuY29t');
          */
-        const user = atob('eW91cnVzZXJuYW1l');   // Base64 de "yourusername" ← CAMBIAR
-        const domain = atob('ZXhhbXBsZS5jb20='); // Base64 de "example.com" ← CAMBIAR
-        const email = user + '@' + domain;        // Construye: usuario@dominio
+        const user = atob("c2F0aGluZHUuZC56b3lzYQ=="); // Base64 de "yourusername" ← CAMBIAR
+        const domain = atob("Z21haWwuY29t"); // Base64 de "example.com" ← CAMBIAR
+        const email = user + "@" + domain; // Construye: usuario@dominio
 
         // CREACIÓN DEL LINK
         // -----------------
         // Crea dinámicamente un elemento <a> con el email
-        const link = document.createElement('a');
-        link.href = 'mailto:' + email;  // Link mailto: para abrir cliente de email
-        link.textContent = email;       // Texto visible del email
-        link.className = 'email-link';  // Clase CSS para estilos
+        const link = document.createElement("a");
+        link.href = "mailto:" + email; // Link mailto: para abrir cliente de email
+        link.textContent = email; // Texto visible del email
+        link.className = "email-link"; // Clase CSS para estilos
 
         // INSERCIÓN EN EL DOM
         // -------------------
@@ -534,8 +548,8 @@ const socialLinks = [
         // ACTUALIZACIÓN DE UI
         // -------------------
         // Oculta el botón y muestra el email
-        revealButton.style.display = 'none';   // Oculta botón "Revelar Email"
-        emailDisplay.style.display = 'block';  // Muestra contenedor del email
+        revealButton.style.display = "none"; // Oculta botón "Revelar Email"
+        emailDisplay.style.display = "block"; // Muestra contenedor del email
       });
     }
   });

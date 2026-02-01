@@ -39,24 +39,24 @@
 // IMPORTACIONES
 // -------------
 // Componentes globales que aparecen en todas las páginas
-import LanguageSwitcher from '../components/LanguageSwitcher.astro';
-import ThemeToggle from '../components/ThemeToggle.astro';
+import LanguageSwitcher from "../components/LanguageSwitcher.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
 
 // PROPS
 // -----
 interface Props {
-  title: string;         // Título de la página (obligatorio)
-  description?: string;  // Meta description para SEO
-  lang?: 'es' | 'en';    // Idioma de la página
-  image?: string;        // Imagen Open Graph (redes sociales)
+  title: string; // Título de la página (obligatorio)
+  description?: string; // Meta description para SEO
+  lang?: "es" | "en"; // Idioma de la página
+  image?: string; // Imagen Open Graph (redes sociales)
 }
 
 // Obtiene props con valores por defecto
 const {
   title,
-  description = "Tech portfolio - Full stack developer",  // CAMBIAR: Tu descripción
-  lang = 'es',
-  image = '/og-image.jpg'  // CAMBIAR: Crea esta imagen en public/
+  description = "Tech portfolio - Full stack developer - Researcher", // CAMBIAR: Tu descripción
+  lang = "es",
+  image = "/og-image.jpg", // CAMBIAR: Crea esta imagen en public/
 } = Astro.props;
 
 // RUTAS Y URLs
@@ -81,9 +81,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
  * - Si lang='es': alternate es /en o /en{path}
  * - Si lang='en': alternate es / o {path sin /en}
  */
-const alternateURL = lang === 'es'
-  ? new URL(currentPath === '/' ? '/en' : `/en${currentPath}`, Astro.site)
-  : new URL(currentPath.replace('/en', '') || '/', Astro.site);
+const alternateURL =
+  lang === "es"
+    ? new URL(currentPath === "/" ? "/en" : `/en${currentPath}`, Astro.site)
+    : new URL(currentPath.replace("/en", "") || "/", Astro.site);
 
 /**
  * OPEN GRAPH IMAGE:
@@ -108,8 +109,7 @@ const ogImage = new URL(image, Astro.site);
   SECCIONES:
   - <head>: Meta tags, estilos, fuentes, scripts
   - <body>: Componentes globales + contenido de la página
--->
-<!doctype html>
+--><!doctype html>
 <html lang={lang}>
   <head>
     <!--
@@ -160,7 +160,11 @@ const ogImage = new URL(image, Astro.site);
       Mejora SEO internacional.
     -->
     <link rel="alternate" hreflang={lang} href={canonicalURL} />
-    <link rel="alternate" hreflang={lang === 'es' ? 'en' : 'es'} href={alternateURL} />
+    <link
+      rel="alternate"
+      hreflang={lang === "es" ? "en" : "es"}
+      href={alternateURL}
+    />
     <link rel="alternate" hreflang="x-default" href={Astro.site} />
 
     <!--
@@ -180,9 +184,13 @@ const ogImage = new URL(image, Astro.site);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:site_name" content="Your Portfolio" />  <!-- CAMBIAR -->
-    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
-    <meta property="og:locale:alternate" content={lang === 'es' ? 'en_US' : 'es_ES'} />
+    <meta property="og:site_name" content="Your Portfolio" />
+    <!-- CAMBIAR -->
+    <meta property="og:locale" content={lang === "es" ? "es_ES" : "en_US"} />
+    <meta
+      property="og:locale:alternate"
+      content={lang === "es" ? "en_US" : "es_ES"}
+    />
 
     <!--
       TWITTER CARD
@@ -203,7 +211,8 @@ const ogImage = new URL(image, Astro.site);
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <meta name="twitter:creator" content="@yourusername" />  <!-- CAMBIAR -->
+    <meta name="twitter:creator" content="@yourusername" />
+    <!-- CAMBIAR -->
 
     <!--
       FAVICONS
@@ -235,7 +244,10 @@ const ogImage = new URL(image, Astro.site);
     -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!--
       JSON-LD STRUCTURED DATA
@@ -253,27 +265,32 @@ const ogImage = new URL(image, Astro.site);
       Google puede mostrar tu perfil con foto, skills, etc.
       en los resultados de búsqueda.
     -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Your Name",  // CAMBIAR
-      "url": Astro.site?.toString(),
-      "image": ogImage.toString(),
-      "sameAs": [  // CAMBIAR: Tus redes sociales
-        "https://github.com/yourusername",
-        "https://twitter.com/yourusername"
-      ],
-      "jobTitle": "Full Stack Developer",  // CAMBIAR
-      "description": description,
-      "knowsAbout": [  // CAMBIAR: Tus skills
-        "React",
-        "Node.js",
-        "Astro",
-        "TypeScript",
-        "Python",
-        "Full Stack Development"
-      ]
-    })} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Your Name", // CAMBIAR
+        url: Astro.site?.toString(),
+        image: ogImage.toString(),
+        sameAs: [
+          // CAMBIAR: Tus redes sociales
+          "https://github.com/yourusername",
+          "https://twitter.com/yourusername",
+        ],
+        jobTitle: "Full Stack Developer", // CAMBIAR
+        description: description,
+        knowsAbout: [
+          // CAMBIAR: Tus skills
+          "React",
+          "Node.js",
+          "Astro",
+          "TypeScript",
+          "Python",
+          "Full Stack Development",
+        ],
+      })}
+    />
 
     <!--
       GOOGLE ANALYTICS
@@ -319,7 +336,7 @@ const ogImage = new URL(image, Astro.site);
     <ThemeToggle lang={lang} />
 
     <!-- Botón de cambio de idioma (es/en) -->
-    <LanguageSwitcher currentLang={lang} currentPath={currentPath} />
+    <!-- <LanguageSwitcher currentLang={lang} currentPath={currentPath} /> -->
 
     <!-- Contenido de la página actual -->
     <slot />
@@ -342,7 +359,7 @@ const ogImage = new URL(image, Astro.site);
   - Tema light/dark
 -->
 <style is:global>
-  @import '../styles/global.css';
+  @import "../styles/global.css";
 </style>
 
 <!--

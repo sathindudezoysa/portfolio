@@ -84,63 +84,18 @@ export interface Translations {
  * - 'en': Inglés (English)
  */
 export const translations: Record<string, Translations> = {
-  /**
-   * TRADUCCIONES EN ESPAÑOL
-   * -----------------------
-   * Cambia estos valores para personalizar tu portfolio en español.
-   * Recuerda mantener la coherencia con la versión en inglés.
-   */
-  es: {
-    // Meta tags para SEO
-    siteTitle: "Tu Nombre - Portfolio Tech",
-    siteDescription: "Portfolio de desarrollo web full stack. Especializado en tecnologías modernas y soluciones innovadoras.",
-
-    // Sección Hero (Principal)
-    heroGreeting: "$ whoami",
-    heroTitle: "Tu Nombre", // Cambia esto por tu nombre real
-    heroSubtitle: "Tu Título Profesional", // Ej: "Full Stack Developer", "Frontend Engineer", "Data Scientist"
-    heroDescription: "Aquí va tu descripción profesional. Cuenta quién eres y qué haces.<br><span class=\"terminal-info\">Esta es una línea adicional de texto más pequeña</span>",
-    heroCta: "cd ~/projects",
-    heroTemplateButton: "git clone template",
-
-    // Sección Proyectos
-    projectsTitle: "$ ls ~/projects",
-    projectsFeatured: "PINNED",
-    projectsDemo: "[demo]",
-    projectsCode: "[code]",
-    projectsImages: "[images]",
-    projectsExplanation: "[explicación]",
-    projectsCsv: "[csv]",
-    projectsWeb: "[web]",
-
-    // Sección Contacto (Footer)
-    contactTitle: "$ contact --me",
-    contactEmailButton: "cat email.txt",
-    contactLinks: "Links",
-
-    // Footer
-    footerCopyright: "© {year} Tu Nombre", // {year} se reemplaza automáticamente
-    footerStatus: "● All systems operational"
-  },
-
-  /**
-   * TRADUCCIONES EN INGLÉS
-   * -----------------------
-   * English translations. Maintain consistency with Spanish version.
-   * Change these values to match your Spanish content.
-   */
   en: {
     // Meta tags for SEO
-    siteTitle: "Your Name - Tech Portfolio",
-    siteDescription: "Full stack web development portfolio. Specialized in modern technologies and innovative solutions.",
+    siteTitle: "Sathindu Dhanushka - Tech Portfolio",
+    siteDescription: "Fellow Researcher (Developer/Creator/Writer)",
 
     // Hero Section (Main)
     heroGreeting: "$ whoami",
-    heroTitle: "Your Name", // Change this to your real name
-    heroSubtitle: "Your Professional Title", // E.g: "Full Stack Developer", "Frontend Engineer", "Data Scientist"
-    heroDescription: "Here goes your professional description. Tell who you are and what you do.<br><span class=\"terminal-info\">This is an additional line of smaller text</span>",
+    heroTitle: "Sathindu Dhanushka", // Change this to your real name
+    heroSubtitle: "Fellow ( Researcher | Developer | Writer)", // E.g: "Full Stack Developer", "Frontend Engineer", "Data Scientist"
+    heroDescription: "I am a student who has a strong passion for research new technologies. I enjoy creating innovative solutions using those thechnologies. All my projects are bult from scratch, from having the idea and developing and all the way to solving the problem.",
     heroCta: "cd ~/projects",
-    heroTemplateButton: "git clone template",
+    heroTemplateButton: "cd ~/contact --me",
 
     // Projects Section
     projectsTitle: "$ ls ~/projects",
@@ -158,67 +113,17 @@ export const translations: Record<string, Translations> = {
     contactLinks: "Links",
 
     // Footer
-    footerCopyright: "© {year} Your Name", // {year} is automatically replaced
+    footerCopyright: "© {year} Sathindu Dhanushka", // {year} is automatically replaced
     footerStatus: "● All systems operational"
   }
 };
 
-/**
- * FUNCIÓN: getTranslations
- * -------------------------
- * Obtiene el objeto de traducciones para un idioma específico.
- * Si el idioma no existe, devuelve español por defecto.
- *
- * PARÁMETROS:
- * @param lang - Código del idioma ('es' o 'en'), por defecto 'es'
- *
- * RETORNA:
- * @returns {Translations} Objeto completo de traducciones
- *
- * EJEMPLO:
- * ```typescript
- * const t = getTranslations('en');
- * console.log(t.siteTitle); // "Your Name - Tech Portfolio"
- * ```
- *
- * FALLBACK:
- * Si se pasa un idioma no soportado (ej: 'fr'), devuelve español.
- */
-export function getTranslations(lang: string = 'es'): Translations {
-  return translations[lang] || translations.es;
+export function getTranslations(lang: string = 'en'): Translations {
+  // Always return English translations
+  return translations.en;
 }
 
-/**
- * FUNCIÓN: getBrowserLanguage
- * ----------------------------
- * Detecta automáticamente el idioma del navegador del usuario.
- * Útil para mostrar el sitio en el idioma preferido del visitante.
- *
- * RETORNA:
- * @returns {string} Código de idioma ('es' o 'en')
- *
- * LÓGICA:
- * 1. Verifica que window esté disponible (solo en cliente)
- * 2. Lee navigator.language o navigator.languages[0]
- * 3. Si el idioma empieza con 'en', devuelve 'en'
- * 4. En cualquier otro caso, devuelve 'es' (español por defecto)
- *
- * EJEMPLO:
- * ```typescript
- * const userLang = getBrowserLanguage();
- * // Usuario en UK: "en"
- * // Usuario en España: "es"
- * // Usuario en Francia: "es" (fallback)
- * ```
- *
- * NOTA:
- * - Esta función solo funciona en el navegador (client-side)
- * - En el servidor (SSR), siempre devuelve 'es'
- */
 export function getBrowserLanguage(): string {
-  if (typeof window !== 'undefined') {
-    const browserLang = navigator.language || navigator.languages?.[0];
-    return browserLang?.startsWith('en') ? 'en' : 'es';
-  }
-  return 'es';
+  // Hardcode to English since we are removing Spanish support
+  return 'en';
 }

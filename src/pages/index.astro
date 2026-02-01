@@ -38,92 +38,88 @@
 // IMPORTACIONES
 // -------------
 // Layout: Contenedor HTML principal con meta tags
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
 // Componentes de la página
-import Hero from '../components/Hero.astro';      // Sección principal de presentación
-import Projects from '../components/Projects.astro';  // Galería de proyectos
-import Footer from '../components/Footer.astro';     // Footer con contacto
+import Hero from "../components/Hero.astro"; // Sección principal de presentación
+import Projects from "../components/Projects.astro"; // Galería de proyectos
+import Footer from "../components/Footer.astro"; // Footer con contacto
 
 // Utilidad de internacionalización para obtener traducciones
-import { useI18n } from '../lib/i18n.js';
+import { useI18n } from "../lib/i18n.js";
 
-// CONFIGURACIÓN DE IDIOMA
-// -----------------------
-// Obtiene las traducciones en español desde translations.ts
-// La const 't' contiene todos los textos en español
-const { t } = useI18n('es');
+// LANGUAGE CONFIGURATION
+// ----------------------
+// Gets English translations from translations.ts
+// The 't' const contains all English texts
+const { t } = useI18n("en");
 ---
 
 <!--
-  ESTRUCTURA HTML
-  ===============
-  Layout: Componente wrapper que genera <html>, <head> y <body>
+  HTML STRUCTURE
+  ==============
+  Layout: Wrapper component that generates <html>, <head> and <body>
 
-  PROPS DE LAYOUT:
-  - title: Título que aparece en la pestaña del navegador
-  - description: Meta descripción para SEO (Google, Bing, etc.)
-  - lang: Código de idioma para el atributo <html lang="">
+  LAYOUT PROPS:
+  - title: Title appearing in browser tab
+  - description: Meta description for SEO (Google, Bing, etc.)
+  - lang: Language code for <html lang=""> attribute
 
-  BENEFICIOS SEO:
-  - title personalizado para cada idioma mejora ranking
-  - description optimizada aumenta CTR en resultados de búsqueda
-  - lang correcto ayuda a motores de búsqueda a indexar adecuadamente
+  SEO BENEFITS:
+  - Localized title improves ranking
+  - Optimized description increases CTR in search results
+  - Correct lang helps search engines index properly
 -->
-<Layout
-  title={t.siteTitle}
-  description={t.siteDescription}
-  lang="es"
->
+<Layout title={t.siteTitle} description={t.siteDescription} lang="en">
   <!--
     MAIN CONTENT
     ============
-    Contenedor principal con id para accesibilidad
-    El id permite navegación directa con "skip to content"
+    Main container with id for accessibility
+    The id allows direct navigation with "skip to content"
 
-    COMPONENTES INCLUIDOS:
-    1. Hero: Sección de bienvenida con nombre, título y descripción
-    2. Projects: Showcase de proyectos con filtrado por tecnología
-    3. Footer: Información de contacto, redes sociales y copyright
+    INCLUDED COMPONENTS:
+    1. Hero: Welcome section with name, title and description
+    2. Projects: Project showcase with technology filtering
+    3. Footer: Contact information, social media and copyright
 
-    NOTA: Todos los componentes reciben lang="es" para renderizar
-    contenido en español desde translations.ts
+    NOTE: All components receive lang="en" to render
+    English content from translations.ts
   -->
   <main id="main-content">
-    <Hero lang="es" />
-    <Projects lang="es" />
-    <Footer lang="es" />
+    <Hero lang="en" />
+    <Projects lang="en" />
+    <Footer lang="en" />
   </main>
 </Layout>
 
 <!--
-  NOTAS TÉCNICAS
-  ==============
+  TECHNICAL NOTES
+  ===============
 
-  1. GENERACIÓN ESTÁTICA (SSG):
-     Esta página se genera en build time, no en runtime.
-     Comando: npm run build
-     Output: dist/index.html
+  1. STATIC GENERATION (SSG):
+     This page is generated at build time, not runtime.
+     Command: npm run build
+     Output: dist/en/index.html
 
-  2. IDIOMA POR DEFECTO:
-     Esta página es la raíz (/), por lo que es el idioma por defecto.
-     Los visitantes que accedan a https://tu-dominio.com/ verán esta versión.
+  2. ALTERNATIVE LANGUAGE:
+     This page is at /en, so it's the alternative language version.
+     Visitors accessing https://your-domain.com/en see this version.
 
-  3. CAMBIO DE IDIOMA:
-     El componente LanguageSwitcher (incluido en Layout) permite
-     cambiar entre español (/index.html) e inglés (/en/index.html)
+  3. LANGUAGE SWITCHING:
+     The LanguageSwitcher component (included in Layout) allows
+     switching between Spanish (/index.html) and English (/en/index.html)
 
-  4. SEO MULTIIDIOMA:
-     Layout.astro incluye tags <link rel="alternate"> que indican
-     a Google que existe una versión alternativa en inglés.
+  4. MULTILINGUAL SEO:
+     Layout.astro includes <link rel="alternate"> tags that tell
+     Google there's an alternative version in Spanish.
 
   5. PERFORMANCE:
-     - HTML estático = carga instantánea
-     - Sin JavaScript necesario para renderizar contenido
-     - CSS minificado en producción
-     - Imágenes lazy-loaded automáticamente
+     - Static HTML = instant loading
+     - No JavaScript needed to render content
+     - Minified CSS in production
+     - Images lazy-loaded automatically
 
-  CÓMO VERIFICAR:
-  - Desarrollo: npm run dev → http://localhost:4321
-  - Producción: npm run build && npm run preview
+  HOW TO VERIFY:
+  - Development: npm run dev → http://localhost:4321/en
+  - Production: npm run build && npm run preview
 -->
