@@ -49,8 +49,8 @@
 // PROPS
 // -----
 interface Props {
-  images: string[];      // Array de rutas a imágenes (sin extensión)
-  projectTitle: string;  // Título del proyecto (usado para IDs)
+  images: string[]; // Array de rutas a imágenes (sin extensión)
+  projectTitle: string; // Título del proyecto (usado para IDs)
 }
 
 const { images, projectTitle } = Astro.props;
@@ -61,18 +61,22 @@ const { images, projectTitle } = Astro.props;
 // Lanza errores en build time si hay problemas
 
 if (!images || !Array.isArray(images) || images.length === 0) {
-  throw new Error(`ImageGallery: 'images' prop must be a non-empty array. Received: ${images}`);
+  throw new Error(
+    `ImageGallery: 'images' prop must be a non-empty array. Received: ${images}`,
+  );
 }
 
-if (!projectTitle || typeof projectTitle !== 'string') {
-  throw new Error(`ImageGallery: 'projectTitle' prop must be a non-empty string. Received: ${projectTitle}`);
+if (!projectTitle || typeof projectTitle !== "string") {
+  throw new Error(
+    `ImageGallery: 'projectTitle' prop must be a non-empty string. Received: ${projectTitle}`,
+  );
 }
 
 // ID ÚNICO DE GALERÍA
 // --------------------
 // Genera un ID único basado en el título del proyecto
 // Ejemplo: "Mi Proyecto" → "gallery-mi-proyecto"
-const galleryId = `gallery-${projectTitle.toLowerCase().replace(/\s+/g, '-')}`;
+const galleryId = `gallery-${projectTitle.toLowerCase().replace(/\s+/g, "-")}`;
 
 /**
  * CONVERSIÓN A WEBP
@@ -93,10 +97,11 @@ const galleryId = `gallery-${projectTitle.toLowerCase().replace(/\s+/g, '-')}`;
  * Necesitas tener las versiones WebP de tus imágenes generadas.
  * Herramienta recomendada: cwebp (CLI de Google)
  */
-const webpImages = images.map(img => {
-  if (img.endsWith('.gif')) return img;  // Mantener GIFs animados
-  if (img.endsWith('.webp')) return img; // Ya es WebP
-  return img + '.webp';                  // Añadir .webp
+const webpImages = images.map((img) => {
+  // if (img.endsWith('.gif')) return img;  // Mantener GIFs animados
+  // if (img.endsWith('.webp')) return img; // Ya es WebP
+  // return img + '.webp';                  // Añadir .webp
+  return img;
 });
 
 /**
@@ -120,14 +125,22 @@ const webpImages = images.map(img => {
  * Necesitas generar thumbnails (ej: 200x200px) para carga rápida.
  * Herramienta: ImageMagick, Sharp, o cwebp con resize
  */
-const thumbnailImages = images.map(img => {
-  if (img.endsWith('.gif')) return img;  // Mantener GIFs como están
-  if (img.endsWith('.webp')) {
-    // Para WebP: reemplaza ruta y extensión
-    return img.replace(/^\/screenshots\//, '/thumbnails/screenshots/').replace(/\.webp$/, '_thumb.webp');
-  }
-  // Para otros: reemplaza ruta y añade _thumb.webp
-  return img.replace(/^\/screenshots\//, '/thumbnails/screenshots/') + '_thumb.webp';
+const thumbnailImages = images.map((img) => {
+  // if (img.endsWith(".gif")) return img; // Mantener GIFs como están
+  // if (img.endsWith(".webp")) {
+  //   // Para WebP: reemplaza ruta y extensión
+  //   return img
+  //     .replace(/^\/screenshots\//, "/thumbnails/screenshots/")
+  //     .replace(/\.webp$/, "_thumb.webp");
+  // }
+  // // Para otros: reemplaza ruta y añade _thumb.webp
+  // return (
+  //   img.replace(/^\/screenshots\//, "/thumbnails/screenshots/") + "_thumb.webp"
+  // );
+
+  return img
+    .replace(/^\/screenshots\//, "/thumbnails/screenshots/")
+    .replace(/(\.[^.]*)?$/, "_thumb$1");
 });
 ---
 
@@ -189,21 +202,23 @@ const thumbnailImages = images.map(img => {
       Permite selección directa de imagen
     -->
     <div class="thumbnail-strip" role="tablist" aria-label="Image thumbnails">
-      {images.map((img, index) => (
-        <button
-          class="thumbnail"
-          data-index={index}
-          role="tab"
-          aria-label={`View image ${index + 1} of ${images.length}`}
-        >
-          <img
-            src={thumbnailImages[index]}
-            alt={`Imagen de ejemplo del proyecto ${projectTitle}`}
-            loading="lazy"
-            decoding="async"
-          />
-        </button>
-      ))}
+      {
+        images.map((img, index) => (
+          <button
+            class="thumbnail"
+            data-index={index}
+            role="tab"
+            aria-label={`View image ${index + 1} of ${images.length}`}
+          >
+            <img
+              src={thumbnailImages[index]}
+              alt={`Imagen de ejemplo del proyecto ${projectTitle}`}
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+        ))
+      }
     </div>
   </div>
 </div>
@@ -439,24 +454,24 @@ const thumbnailImages = images.map(img => {
   // ------------------
   // Encuentra los elementos de esta galería específica
   const modal = document.getElementById(galleryId);
-  if (!modal) return;  // Si no existe el modal, salir
+  if (!modal) return; // Si no existe el modal, salir
 
-  const overlay = modal.querySelector('.modal-overlay');        // Overlay oscuro
-  const closeBtn = modal.querySelector('.modal-close');         // Botón X
-  const prevBtn = modal.querySelector('.prev');                 // Botón ‹
-  const nextBtn = modal.querySelector('.next');                 // Botón ›
-  const img = modal.querySelector('.image-container img');      // Imagen principal
-  const thumbnails = modal.querySelectorAll('.thumbnail');      // Todos los thumbnails
+  const overlay = modal.querySelector(".modal-overlay"); // Overlay oscuro
+  const closeBtn = modal.querySelector(".modal-close"); // Botón X
+  const prevBtn = modal.querySelector(".prev"); // Botón ‹
+  const nextBtn = modal.querySelector(".next"); // Botón ›
+  const img = modal.querySelector(".image-container img"); // Imagen principal
+  const thumbnails = modal.querySelectorAll(".thumbnail"); // Todos los thumbnails
 
   // ESTADO
   // ------
-  let currentIndex = 0;  // Índice de la imagen actual (0-based)
+  let currentIndex = 0; // Índice de la imagen actual (0-based)
 
   // MANEJO DE ERRORES
   // -----------------
   // Si una imagen falla al cargar, actualiza el alt text
-  img.addEventListener('error', () => {
-    img.alt = 'Image failed to load';
+  img.addEventListener("error", () => {
+    img.alt = "Image failed to load";
   });
 
   function showImage(index) {
@@ -468,19 +483,19 @@ const thumbnailImages = images.map(img => {
     img.src = webpImages[index];
 
     thumbnails.forEach((thumb, i) => {
-      thumb.classList.toggle('active', i === index);
+      thumb.classList.toggle("active", i === index);
     });
   }
 
   function openGallery(startIndex = 0) {
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
     showImage(startIndex);
   }
 
   function closeGallery() {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
   }
 
   function nextImage() {
@@ -494,22 +509,22 @@ const thumbnailImages = images.map(img => {
   }
 
   // Event listeners
-  closeBtn?.addEventListener('click', closeGallery);
-  overlay?.addEventListener('click', closeGallery);
-  prevBtn?.addEventListener('click', prevImage);
-  nextBtn?.addEventListener('click', nextImage);
+  closeBtn?.addEventListener("click", closeGallery);
+  overlay?.addEventListener("click", closeGallery);
+  prevBtn?.addEventListener("click", prevImage);
+  nextBtn?.addEventListener("click", nextImage);
 
   thumbnails.forEach((thumb, index) => {
-    thumb.addEventListener('click', () => showImage(index));
+    thumb.addEventListener("click", () => showImage(index));
   });
 
   // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    if (!modal.classList.contains('active')) return;
+  document.addEventListener("keydown", (e) => {
+    if (!modal.classList.contains("active")) return;
 
-    if (e.key === 'Escape') closeGallery();
-    if (e.key === 'ArrowRight') nextImage();
-    if (e.key === 'ArrowLeft') prevImage();
+    if (e.key === "Escape") closeGallery();
+    if (e.key === "ArrowRight") nextImage();
+    if (e.key === "ArrowLeft") prevImage();
   });
 
   // ===== FUNCIÓN GLOBAL =====

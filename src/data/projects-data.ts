@@ -60,24 +60,21 @@
 export interface Project {
   // TÍTULO (Obligatorio)
   // Aparece como encabezado principal del proyecto
-  title: {
-    es: string;  // Título en español
+  title: { // Título en español
     en: string;  // Título en inglés
   };
 
   // DESCRIPCIÓN (Obligatorio)
   // Texto que aparece en la tarjeta del proyecto
   // SOPORTA HTML: Puedes usar <strong>, <br>, <span>, etc.
-  description: {
-    es: string;  // Descripción en español
+  description: { // Descripción en español
     en: string;  // Descripción en inglés
   };
 
   // EXPLICACIÓN EXTENDIDA (Opcional)
   // Si se define, aparece botón [explicación] que abre modal con este contenido
   // Útil para proyectos complejos que necesitan más contexto
-  explanation?: {
-    es: string;  // Explicación en español
+  explanation?: { // Explicación en español
     en: string;  // Explicación en inglés
   };
 
@@ -150,33 +147,31 @@ export const projectsData: Project[] = [
    *
    * BOTONES QUE MUESTRA:
    * [demo] [code] [web] [images] [explicación] [csv] + badge PINNED
+   * 
    */
   {
     title: {
-      es: "Proyecto Completo Ejemplo", // CAMBIAR: Nombre de tu proyecto
-      en: "Complete Example Project"
+      en: "AlertEYE"
     },
     description: {
       // SOPORTA HTML: <strong>, <br>, <span>, etc.
-      es: "<strong>Título destacado del proyecto.</strong><br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aquí describes brevemente tu proyecto. <strong>Característica 1</strong>, <strong>Característica 2</strong>, <strong>Característica 3</strong>.",
-      en: "<strong>Project featured title.</strong><br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Here you briefly describe your project. <strong>Feature 1</strong>, <strong>Feature 2</strong>, <strong>Feature 3</strong>."
-    },
-    explanation: {
-      // OPCIONAL: Descripción detallada que aparece en modal
-      // Útil para explicar contexto, arquitectura, resultados, métricas
-      es: "Aquí va la explicación EXTENDIDA del proyecto (opcional).<br><br><strong>Sección 1:</strong><br>• Punto 1<br>• Punto 2<br>• Punto 3<br><br><strong>Sección 2:</strong><br>• Detalle adicional<br>• Más información<br><br>Usa este campo para dar contexto detallado del proyecto.",
-      en: "Here goes the EXTENDED explanation of the project (optional).<br><br><strong>Section 1:</strong><br>• Point 1<br>• Point 2<br>• Point 3<br><br><strong>Section 2:</strong><br>• Additional detail<br>• More information<br><br>Use this field to give detailed context of the project."
-    },
-    tech: ["Skill 1", "Skill 2", "Skill 3", "Skill 4"], // CAMBIAR: Reemplaza con tecnologías reales (React, Node, etc.)
-    link: "https://github.com/yourusername/repo-name", // CAMBIAR: URL de tu repositorio GitHub
-    demo: "https://demo.yourproject.com", // CAMBIAR: URL de tu demo en vivo (Vercel, Netlify, etc.)
-    web: "https://www.yourproject.com", // CAMBIAR: URL del sitio web oficial
-    csv: "/assets/example-data/sample-data.csv", // CAMBIAR: Ruta a tu archivo CSV en public/assets/
+      en: "<strong>Real-time driver monitoring and rewarding system.</strong><br><br>Developed android application for risk detection, instant alerts and reward engine and an IOT hardware device using Arduino sensors to further detect driver behavior. Implemented computer-vision-based drowsiness detection using OpenCV and pre-trained machine learning models."
+    },    
+    // {
+    //   // OPCIONAL: Descripción detallada que aparece en modal
+    //   // Útil para explicar contexto, arquitectura, resultados, métricas
+    //   en: "Here goes the EXTENDED explanation of the project (optional).<br><br><strong>Section 1:</strong><br>• Point 1<br>• Point 2<br>• Point 3<br><br><strong>Section 2:</strong><br>• Additional detail<br>• More information<br><br>Use this field to give detailed context of the project."
+    // },
+    tech: ["Arduino", "Android Studio", "Java", "Firebase", "Google Maps API", "OpenCV", "Python"], // CAMBIAR: Reemplaza con tecnologías reales (React, Node, etc.)
+    link: "https://github.com/sathindudezoysa/AlertEYE", // CAMBIAR: URL de tu repositorio GitHub
+    demo: "https://www.instagram.com/p/DBAzdklM0_y/", // CAMBIAR: URL de tu demo en vivo (Vercel, Netlify, etc.)
+    web: null, // CAMBIAR: URL del sitio web oficial
+    csv: null, // CAMBIAR: Ruta a tu archivo CSV en public/assets/
     featured: true, // true = aparece como "PINNED" al inicio
     images: [ // CAMBIAR: Rutas a tus screenshots (sin extensión .png, .jpg)
-      "/screenshots/example-project/screenshot-01",
-      "/screenshots/example-project/screenshot-02",
-      "/screenshots/example-project/screenshot-03"
+      "/screenshots/alertEye/1768631005012.jpeg",
+      "/screenshots/alertEye/1768630937847.jpeg",
+      "/screenshots/alertEye/1768630908769.jpeg"
     ]
   },
 
@@ -193,18 +188,21 @@ export const projectsData: Project[] = [
    */
   {
     title: {
-      es: "Proyecto Destacado",
-      en: "Featured Project"
+      en: "Sentinel Store"
     },
     description: {
-      es: "<strong>Otro proyecto importante.</strong><br><br>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <strong>Funcionalidad A</strong>, <strong>Funcionalidad B</strong>, <strong>Funcionalidad C</strong>.",
-      en: "<strong>Another important project.</strong><br><br>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <strong>Functionality A</strong>, <strong>Functionality B</strong>, <strong>Functionality C</strong>."
+      en: `
+      <strong>Distributed File Storage System with ZooKeeper </strong>
+      <br/>
+      <br/>
+      This project implements a fault-tolerant distributed file storage system using ZooKeeper for leader election and a consensus algorithm for maintaining data consistency across nodes.
+      `
     },
     // Sin explanation = no aparece botón [explicación]
-    tech: ["Skill 1", "Skill 2", "Skill 3"],
-    link: "https://github.com/yourusername/another-repo",
+    tech: ["Apache ZooKeeper", "Fault Tolerant Systems", "Distributed Systems"],
+    link: "https://github.com/sathindudezoysa/SentinelStore",
     demo: null, // null = no mostrar botón [demo]
-    web: "https://www.anotherproject.com",
+    web: null,
     csv: null, // null = no mostrar botón [csv]
     featured: true, // PINNED
     images: null // null = no mostrar botón [images]
@@ -223,19 +221,20 @@ export const projectsData: Project[] = [
    */
   {
     title: {
-      es: "Proyecto Regular",
-      en: "Regular Project"
+      en: "Rahasak"
     },
     description: {
-      es: "<strong>Descripción breve.</strong><br><br>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Este es un proyecto estándar.",
-      en: "<strong>Brief description.</strong><br><br>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. This is a standard project."
+      en: `
+      <strong>End-to-End Encrypted Messaging Platform</strong><br><br>
+      Rahasak (meaning "Secret" or "Whisper" in Sinhala) is a secure, end-to-end encrypted messaging platform designed to prioritize user privacy and trust. Unlike traditional messaging apps that rely on centralized servers for key distribution, Rahasak introduces a novel physical key exchange protocol, allowing users to establish trust offline before communicating.
+      `
     },
-    tech: ["Skill A", "Skill B"],
+    tech: ["Encryption", " Private Key Management", "Public Key Cryptography", "Apache Kafka", "Next.js"],
     link: "https://github.com/yourusername/project-repo",
     demo: "https://project-demo.com",
     web: null,
     csv: null,
-    featured: false, // false = NO aparece como destacado
+    featured: true, // false = NO aparece como destacado
     images: null
   },
 
@@ -252,15 +251,15 @@ export const projectsData: Project[] = [
    */
   {
     title: {
-      es: "Proyecto Simple",
-      en: "Simple Project"
+      en: "TestLang++"
     },
     description: {
-      es: "<strong>Proyecto básico.</strong><br><br>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
-      en: "<strong>Basic project.</strong><br><br>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore."
+      en: `
+      <strong>API Testing DSL Compiler</strong><br><br>
+      The compiler is built using Flex (Lex) and Bison (Yacc) with code generation in C. It parses a custom .test file (like example.txt) and translates it into a complete, runnable JUnit 5 Java test class (GeneratedTests.java). This generated class uses the native java.net.http.HttpClient to execute the defined API tests against a backend.`
     },
-    tech: ["Skill X", "Skill Y", "Skill Z"],
-    link: "https://github.com/yourusername/simple-project",
+    tech: ["C", "Lex", "Yacc", "Compiler Theory"],
+    link: "https://github.com/sathindud/JavaCompiler/tree/main/new",
     demo: null, // Todo null = solo muestra [code]
     web: null,
     csv: null,
