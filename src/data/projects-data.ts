@@ -188,16 +188,21 @@ export const projectsData: Project[] = [
    */
   {
     title: {
-      en: "Featured Project"
+      en: "Sentinel Store"
     },
     description: {
-      en: "<strong>Another important project.</strong><br><br>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <strong>Functionality A</strong>, <strong>Functionality B</strong>, <strong>Functionality C</strong>."
+      en: `
+      <strong>Distributed File Storage System with ZooKeeper </strong>
+      <br/>
+      <br/>
+      This project implements a fault-tolerant distributed file storage system using ZooKeeper for leader election and a consensus algorithm for maintaining data consistency across nodes.
+      `
     },
     // Sin explanation = no aparece botón [explicación]
-    tech: ["Skill 1", "Skill 2", "Skill 3"],
-    link: "https://github.com/yourusername/another-repo",
+    tech: ["Apache ZooKeeper", "Fault Tolerant Systems", "Distributed Systems"],
+    link: "https://github.com/sathindudezoysa/SentinelStore",
     demo: null, // null = no mostrar botón [demo]
-    web: "https://www.anotherproject.com",
+    web: null,
     csv: null, // null = no mostrar botón [csv]
     featured: true, // PINNED
     images: null // null = no mostrar botón [images]
@@ -216,17 +221,20 @@ export const projectsData: Project[] = [
    */
   {
     title: {
-      en: "Regular Project"
+      en: "Rahasak"
     },
     description: {
-      en: "<strong>Brief description.</strong><br><br>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. This is a standard project."
+      en: `
+      <strong>End-to-End Encrypted Messaging Platform</strong><br><br>
+      Rahasak (meaning "Secret" or "Whisper" in Sinhala) is a secure, end-to-end encrypted messaging platform designed to prioritize user privacy and trust. Unlike traditional messaging apps that rely on centralized servers for key distribution, Rahasak introduces a novel physical key exchange protocol, allowing users to establish trust offline before communicating.
+      `
     },
-    tech: ["Skill A", "Skill B"],
+    tech: ["Encryption", " Private Key Management", "Public Key Cryptography", "Apache Kafka", "Next.js"],
     link: "https://github.com/yourusername/project-repo",
     demo: "https://project-demo.com",
     web: null,
     csv: null,
-    featured: false, // false = NO aparece como destacado
+    featured: true, // false = NO aparece como destacado
     images: null
   },
 
@@ -243,13 +251,15 @@ export const projectsData: Project[] = [
    */
   {
     title: {
-      en: "Simple Project"
+      en: "TestLang++"
     },
     description: {
-      en: "<strong>Basic project.</strong><br><br>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore."
+      en: `
+      <strong>API Testing DSL Compiler</strong><br><br>
+      The compiler is built using Flex (Lex) and Bison (Yacc) with code generation in C. It parses a custom .test file (like example.txt) and translates it into a complete, runnable JUnit 5 Java test class (GeneratedTests.java). This generated class uses the native java.net.http.HttpClient to execute the defined API tests against a backend.`
     },
-    tech: ["Skill X", "Skill Y", "Skill Z"],
-    link: "https://github.com/yourusername/simple-project",
+    tech: ["C", "Lex", "Yacc", "Compiler Theory"],
+    link: "https://github.com/sathindud/JavaCompiler/tree/main/new",
     demo: null, // Todo null = solo muestra [code]
     web: null,
     csv: null,
