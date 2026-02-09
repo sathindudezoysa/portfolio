@@ -78,6 +78,7 @@ if (!projectTitle || typeof projectTitle !== "string") {
 // Ejemplo: "Mi Proyecto" → "gallery-mi-proyecto"
 const galleryId = `gallery-${projectTitle.toLowerCase().replace(/\s+/g, "-")}`;
 
+const base = import.meta.env.BASE_URL;
 /**
  * CONVERSIÓN A WEBP
  * -----------------
@@ -101,7 +102,7 @@ const webpImages = images.map((img) => {
   // if (img.endsWith('.gif')) return img;  // Mantener GIFs animados
   // if (img.endsWith('.webp')) return img; // Ya es WebP
   // return img + '.webp';                  // Añadir .webp
-  return img;
+  return `${base}${img}`;
 });
 
 /**
@@ -138,9 +139,12 @@ const thumbnailImages = images.map((img) => {
   //   img.replace(/^\/screenshots\//, "/thumbnails/screenshots/") + "_thumb.webp"
   // );
 
-  return img
-    .replace(/^\/screenshots\//, "/thumbnails/screenshots/")
+  const path = img
+    .replace(/screenshots/, "thumbnails/screenshots")
     .replace(/(\.[^.]*)?$/, "_thumb$1");
+
+  console.log(base);
+  return `${base}${path}`;
 });
 ---
 

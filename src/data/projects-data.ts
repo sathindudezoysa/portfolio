@@ -169,9 +169,9 @@ export const projectsData: Project[] = [
     csv: null, // CAMBIAR: Ruta a tu archivo CSV en public/assets/
     featured: true, // true = aparece como "PINNED" al inicio
     images: [ // CAMBIAR: Rutas a tus screenshots (sin extensión .png, .jpg)
-      "/screenshots/alertEye/1768631005012.jpeg",
-      "/screenshots/alertEye/1768630937847.jpeg",
-      "/screenshots/alertEye/1768630908769.jpeg"
+      "screenshots/alertEye/1768631005012.jpeg",
+      "screenshots/alertEye/1768630937847.jpeg",
+      "screenshots/alertEye/1768630908769.jpeg"
     ]
   },
 
