@@ -191,7 +191,8 @@ export const projectsData: Project[] = [
       en: "Sentinel Store"
     },
     description: {
-      en: `
+      en:
+      `
       <strong>Distributed File Storage System with ZooKeeper </strong>
       <br/>
       <br/>
