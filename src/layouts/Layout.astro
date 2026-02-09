@@ -64,6 +64,8 @@ const {
 // Obtiene la ruta actual para el LanguageSwitcher
 const currentPath = Astro.url.pathname;
 
+const base = import.meta.env.BASE_URL;
+
 /**
  * CANONICAL URL:
  * URL canónica de la página actual.
@@ -224,8 +226,8 @@ const ogImage = new URL(image, Astro.site);
       Tamaño recomendado: 32x32px o 16x16px
       Herramienta: https://favicon.io/
     -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href={`${base}favicon.ico`} />
+    <link rel="shortcut icon" href={`${base}favicon.ico`} />
 
     <!--
       FONTS (GOOGLE FONTS)
