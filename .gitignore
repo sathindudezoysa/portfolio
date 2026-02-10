@@ -29,3 +29,5 @@ pnpm-debug.log*
 
 # Optional: screenshots (uncomment if you want to keep them out of git)
 # public/screenshots/
+
+astro.config.mjs
