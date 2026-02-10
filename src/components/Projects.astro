@@ -46,22 +46,22 @@
 // IMPORTACIONES
 // -------------
 // Componente de galería de imágenes lightbox
-import ImageGallery from './ImageGallery.astro';
+import ImageGallery from "./ImageGallery.astro";
 
 // Utilidad para obtener proyectos ordenados (featured primero)
-import { getAllProjects } from '../lib/projects.js';
+import { getAllProjects } from "../lib/projects.js";
 
 // Utilidad de internacionalización
-import { useI18n } from '../lib/i18n.js';
+import { useI18n } from "../lib/i18n.js";
 
 // PROPS
 // -----
 interface Props {
-  lang?: string;  // Idioma de la página ('es' o 'en')
+  lang?: string; // Idioma de la página ('es' o 'en')
 }
 
 // Obtiene props con valores por defecto
-const { lang = 'es' } = Astro.props;
+const { lang = "es" } = Astro.props;
 
 // TRADUCCIONES
 // ------------
@@ -135,7 +135,7 @@ const projects = getAllProjects();
       <div class="filter-output" id="filter-container" style="display: none;">
         <!-- Botón "all": Muestra todos los proyectos -->
         <button class="filter-btn active mono" data-filter="all">
-          {lang === 'es' ? 'all' : 'all'}
+          {lang === "es" ? "all" : "all"}
         </button>
 
         <!--
@@ -152,11 +152,15 @@ const projects = getAllProjects();
           RESULTADO:
           Lista única y ordenada de todas las tecnologías usadas
         -->
-        {Array.from(new Set(projects.flatMap(p => p.tech))).sort().map(tech => (
-          <button class="filter-btn mono" data-filter={tech}>
-            {tech}
-          </button>
-        ))}
+        {
+          Array.from(new Set(projects.flatMap((p) => p.tech)))
+            .sort()
+            .map((tech) => (
+              <button class="filter-btn mono" data-filter={tech}>
+                {tech}
+              </button>
+            ))
+        }
       </div>
     </div>
 
@@ -199,110 +203,122 @@ const projects = getAllProjects();
       - fade-in: Animación de aparición (global.css)
     -->
     <div class="projects-grid">
-      {projects.map((project, index) => (
-        <article
-          class={`project-card ${project.featured ? 'featured' : ''} fade-in`}
-          style={`animation-delay: ${index * 0.1}s`}
-          data-tech={project.tech.join(',')}
-        >
-          {/* Badge PINNED para proyectos destacados */}
-          {project.featured && (
-            <span class="featured-badge mono">{t.projectsFeatured}</span>
-          )}
-
-          {/* Título del proyecto (bilingüe) */}
-          <h3>{project.title[lang]}</h3>
-
-          {/* Descripción (soporta HTML con set:html) */}
-          <p set:html={project.description[lang]}></p>
-
-          {/* Tech Stack: Etiquetas de tecnologías usadas */}
-          <div class="tech-stack">
-            {project.tech.map(tech => (
-              <span class="tech-tag">{tech}</span>
-            ))}
-          </div>
-
-          {/* Enlaces del proyecto (solo se muestran si existen) */}
-          <div class="project-links">
-            {/* DEMO: Link a demo en vivo */}
-            {project.demo && (
-              <a
-                href={project.demo}
-                target="_blank"
-                rel="noopener"
-                data-event="click_demo"
-                data-project={project.title[lang]}
-              >
-                <span class="mono">{t.projectsDemo}</span>
-              </a>
+      {
+        projects.map((project, index) => (
+          <article
+            class={`project-card ${project.featured ? "featured" : ""} fade-in`}
+            style={`animation-delay: ${index * 0.1}s`}
+            data-tech={project.tech.join(",")}
+          >
+            {/* Badge PINNED para proyectos destacados */}
+            {project.featured && (
+              <span class="featured-badge mono">{t.projectsFeatured}</span>
             )}
 
-            {/* CODE: Link a repositorio GitHub */}
-            {project.link && (
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener"
-                data-event="click_code"
-                data-project={project.title[lang]}
-              >
-                <span class="mono">{t.projectsCode}</span>
-              </a>
-            )}
+            {/* Título del proyecto (bilingüe) */}
+            <h3>{project.title[lang]}</h3>
 
-            {/* WEB: Link a sitio web oficial */}
-            {project.web && (
-              <a
-                href={project.web}
-                target="_blank"
-                rel="noopener"
-                data-event="click_web"
-                data-project={project.title[lang]}
-              >
-                <span class="mono">{t.projectsWeb}</span>
-              </a>
-            )}
+            {/* Descripción (soporta HTML con set:html) */}
+            <p set:html={project.description[lang]} />
 
-            {/* IMAGES: Botón para abrir galería de screenshots */}
-            {project.images && (
-              <button
-                class="btn-images mono"
-                data-gallery={`gallery-${project.title[lang].toLowerCase().replace(/\s+/g, '-')}`}
-                data-event="view_images"
-                data-project={project.title[lang]}
-              >
-                {t.projectsImages}
-              </button>
-            )}
+            {/* Tech Stack: Etiquetas de tecnologías usadas */}
+            <div class="tech-stack">
+              {project.tech.map((tech) => (
+                <span class="tech-tag">{tech}</span>
+              ))}
+            </div>
 
-            {/* EXPLANATION: Botón para abrir modal de explicación */}
-            {project.explanation && (
-              <button
-                class="btn-explanation mono"
-                data-explanation={`explanation-${project.title[lang].toLowerCase().replace(/\s+/g, '-')}`}
-                data-event="view_explanation"
-                data-project={project.title[lang]}
-              >
-                {t.projectsExplanation}
-              </button>
-            )}
+            {/* Enlaces del proyecto (solo se muestran si existen) */}
+            <div class="project-links">
+              {/* DEMO: Link a demo en vivo */}
+              {project.demo && (
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener"
+                  data-event="click_demo"
+                  data-project={project.title[lang]}
+                >
+                  <span class="mono">{t.projectsDemo}</span>
+                </a>
+              )}
 
-            {/* CSV: Link para descargar archivo CSV */}
-            {project.csv && (
-              <a
-                href={project.csv}
-                target="_blank"
-                rel="noopener"
-                data-event="download_csv"
-                data-project={project.title[lang]}
-              >
-                <span class="mono">{t.projectsCsv}</span>
-              </a>
-            )}
-          </div>
-        </article>
-      ))}
+              {/* CODE: Link a repositorio GitHub */}
+              {project.link && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener"
+                  data-event="click_code"
+                  data-project={project.title[lang]}
+                >
+                  <span class="mono">{t.projectsCode}</span>
+                </a>
+              )}
+
+              {/* WEB: Link a sitio web oficial */}
+              {project.web && (
+                <a
+                  href={project.web}
+                  target="_blank"
+                  rel="noopener"
+                  data-event="click_web"
+                  data-project={project.title[lang]}
+                >
+                  <span class="mono">{t.projectsWeb}</span>
+                </a>
+              )}
+
+              {/* IMAGES: Botón para abrir galería de screenshots */}
+              {project.images && (
+                <button
+                  class="btn-images mono"
+                  data-gallery={`gallery-${project.title[lang].toLowerCase().replace(/\s+/g, "-")}`}
+                  data-event="view_images"
+                  data-project={project.title[lang]}
+                >
+                  {t.projectsImages}
+                </button>
+              )}
+
+              {/* EXPLANATION: Botón para abrir modal de explicación */}
+              {project.explanation && (
+                <button
+                  class="btn-explanation mono"
+                  data-explanation={`explanation-${project.title[lang].toLowerCase().replace(/\s+/g, "-")}`}
+                  data-event="view_explanation"
+                  data-project={project.title[lang]}
+                >
+                  {t.projectsExplanation}
+                </button>
+              )}
+
+              {/* CSV: Link para descargar archivo CSV */}
+              {project.csv && (
+                <a
+                  href={project.csv}
+                  target="_blank"
+                  rel="noopener"
+                  data-event="download_csv"
+                  data-project={project.title[lang]}
+                >
+                  <span class="mono">{t.projectsCsv}</span>
+                </a>
+              )}
+
+              {/* Project in details */}
+              {project.slug && (
+                <a
+                  href={`/projects/${project.slug}`}
+                  class="mono text-sm border-b border-[var(--text)] hover:opacity-70"
+                >
+                  [details]
+                </a>
+              )}
+            </div>
+          </article>
+        ))
+      }
     </div>
   </div>
 
@@ -314,11 +330,17 @@ const projects = getAllProjects();
     Las galerías son modales lightbox con navegación entre imágenes.
     JavaScript las conecta con los botones [images] de arriba.
   -->
-  {projects.map(project =>
-    project.images && (
-      <ImageGallery images={project.images} projectTitle={project.title[lang]} />
+  {
+    projects.map(
+      (project) =>
+        project.images && (
+          <ImageGallery
+            images={project.images}
+            projectTitle={project.title[lang]}
+          />
+        ),
     )
-  )}
+  }
 
   <!--
     MODALES DE EXPLICACIÓN
@@ -341,66 +363,104 @@ const projects = getAllProjects();
     - aria-labelledby: Conecta con el título del modal (accesibilidad)
     - aria-label: Etiqueta para el botón de cerrar
   -->
-  {projects.map(project =>
-    project.explanation && (
-      <div
-        class="explanation-modal"
-        id={`explanation-${project.title[lang].toLowerCase().replace(/\s+/g, '-')}`}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={`modal-title-${project.title[lang].toLowerCase().replace(/\s+/g, '-')}`}
-      >
-        {/* Overlay oscuro de fondo */}
-        <div class="modal-overlay" aria-hidden="true"></div>
+  {
+    projects.map(
+      (project) =>
+        project.explanation && (
+          <div
+            class="explanation-modal"
+            id={`explanation-${project.title[lang].toLowerCase().replace(/\s+/g, "-")}`}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={`modal-title-${project.title[lang].toLowerCase().replace(/\s+/g, "-")}`}
+          >
+            {/* Overlay oscuro de fondo */}
+            <div class="modal-overlay" aria-hidden="true" />
 
-        {/* Contenido del modal */}
-        <div class="modal-content">
-          {/* Botón cerrar (X) */}
-          <button class="modal-close" aria-label={lang === 'es' ? 'Cerrar modal' : 'Close modal'}>×</button>
+            {/* Contenido del modal */}
+            <div class="modal-content">
+              {/* Botón cerrar (X) */}
+              <button
+                class="modal-close"
+                aria-label={lang === "es" ? "Cerrar modal" : "Close modal"}
+              >
+                ×
+              </button>
 
-          {/* Cuerpo del modal con scroll */}
-          <div class="modal-body">
-            {/* Título del proyecto */}
-            <h3 class="mono" id={`modal-title-${project.title[lang].toLowerCase().replace(/\s+/g, '-')}`}>
-              {project.title[lang]}
-            </h3>
+              {/* Cuerpo del modal con scroll */}
+              <div class="modal-body">
+                {/* Título del proyecto */}
+                <h3
+                  class="mono"
+                  id={`modal-title-${project.title[lang].toLowerCase().replace(/\s+/g, "-")}`}
+                >
+                  {project.title[lang]}
+                </h3>
 
-            {/* Texto de explicación (soporta HTML) */}
-            <div class="explanation-text" set:html={project.explanation ? project.explanation[lang] : ''}>
+                {/* Texto de explicación (soporta HTML) */}
+                <div
+                  class="explanation-text"
+                  set:html={
+                    project.explanation ? project.explanation[lang] : ""
+                  }
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        ),
     )
-  )}
+  }
 
-  {projects.map(project =>
-    project.images && (
-      <ImageGallery images={project.images} projectTitle={project.title[lang]} />
+  {
+    projects.map(
+      (project) =>
+        project.images && (
+          <ImageGallery
+            images={project.images}
+            projectTitle={project.title[lang]}
+          />
+        ),
     )
-  )}
-  
-  {projects.map(project =>
-    project.explanation && (
-      <div
-        class="explanation-modal"
-        id={`explanation-${project.title[lang].toLowerCase().replace(/\s+/g, '-')}`}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={`modal-title-${project.title[lang].toLowerCase().replace(/\s+/g, '-')}`}
-      >
-        <div class="modal-overlay" aria-hidden="true"></div>
-        <div class="modal-content">
-          <button class="modal-close" aria-label={lang === 'es' ? 'Cerrar modal' : 'Close modal'}>×</button>
-          <div class="modal-body">
-            <h3 class="mono" id={`modal-title-${project.title[lang].toLowerCase().replace(/\s+/g, '-')}`}>{project.title[lang]}</h3>
-            <div class="explanation-text" set:html={project.explanation ? project.explanation[lang] : ''}>
+  }
+
+  {
+    projects.map(
+      (project) =>
+        project.explanation && (
+          <div
+            class="explanation-modal"
+            id={`explanation-${project.title[lang].toLowerCase().replace(/\s+/g, "-")}`}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={`modal-title-${project.title[lang].toLowerCase().replace(/\s+/g, "-")}`}
+          >
+            <div class="modal-overlay" aria-hidden="true" />
+            <div class="modal-content">
+              <button
+                class="modal-close"
+                aria-label={lang === "es" ? "Cerrar modal" : "Close modal"}
+              >
+                ×
+              </button>
+              <div class="modal-body">
+                <h3
+                  class="mono"
+                  id={`modal-title-${project.title[lang].toLowerCase().replace(/\s+/g, "-")}`}
+                >
+                  {project.title[lang]}
+                </h3>
+                <div
+                  class="explanation-text"
+                  set:html={
+                    project.explanation ? project.explanation[lang] : ""
+                  }
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        ),
     )
-  )}
+  }
 </section>
 
 <style>
@@ -441,15 +501,15 @@ const projects = getAllProjects();
      SECCIÓN PROJECTS: Contenedor principal
      ============================================ */
   .projects {
-    padding: 6rem 0;  /* 96px arriba y abajo */
+    padding: 6rem 0; /* 96px arriba y abajo */
   }
 
   /* ============================================
      FILTRO: Wrapper del sistema de filtrado
      ============================================ */
   .filter-wrapper {
-    margin-top: 2rem;     /* 32px arriba */
-    margin-bottom: 2rem;  /* 32px abajo */
+    margin-top: 2rem; /* 32px arriba */
+    margin-bottom: 2rem; /* 32px abajo */
   }
 
   .filter-toggle {
@@ -489,8 +549,14 @@ const projects = getAllProjects();
   }
 
   @keyframes blink {
-    0%, 49% { opacity: 1; }
-    50%, 100% { opacity: 0; }
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
   }
 
   .filter-output {
@@ -587,7 +653,10 @@ const projects = getAllProjects();
   .project-card {
     padding: 2rem;
     border: 1px solid var(--border);
-    transition: transform 0.3s, border-color 0.3s, background 0.3s;
+    transition:
+      transform 0.3s,
+      border-color 0.3s,
+      background 0.3s;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -601,17 +670,29 @@ const projects = getAllProjects();
 
   .project-card.featured {
     border: 2px solid var(--text);
-    background: linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.02) 100%);
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.02) 100%
+    );
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) .project-card.featured {
-      background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.02) 100%);
+      background: linear-gradient(
+        135deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.02) 100%
+      );
     }
   }
 
   [data-theme="dark"] .project-card.featured {
-    background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.02) 100%);
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
   }
 
   .featured-badge {
@@ -859,76 +940,76 @@ const projects = getAllProjects();
   // EVENT LISTENER: DOMContentLoaded
   // ---------------------------------
   // Espera a que todo el HTML esté cargado antes de ejecutar
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     // ===== REFERENCIAS AL DOM =====
     // Encuentra todos los elementos interactivos
-    const imageButtons = document.querySelectorAll('.btn-images');          // Botones [images]
-    const explanationButtons = document.querySelectorAll('.btn-explanation'); // Botones [explicación]
-    const filterButtons = document.querySelectorAll('.filter-btn');          // Botones de tecnologías
-    const projectCards = document.querySelectorAll('.project-card');         // Tarjetas de proyectos
-    const filterToggle = document.getElementById('filter-toggle');           // Botón toggle filtros
-    const filterContainer = document.getElementById('filter-container');     // Panel de filtros
-    let lastFocusedElement = null;  // Guarda el elemento que abrió un modal
+    const imageButtons = document.querySelectorAll(".btn-images"); // Botones [images]
+    const explanationButtons = document.querySelectorAll(".btn-explanation"); // Botones [explicación]
+    const filterButtons = document.querySelectorAll(".filter-btn"); // Botones de tecnologías
+    const projectCards = document.querySelectorAll(".project-card"); // Tarjetas de proyectos
+    const filterToggle = document.getElementById("filter-toggle"); // Botón toggle filtros
+    const filterContainer = document.getElementById("filter-container"); // Panel de filtros
+    let lastFocusedElement = null; // Guarda el elemento que abrió un modal
 
     // ===== TOGGLE DEL PANEL DE FILTROS =====
     // Muestra/oculta el panel de tecnologías estilo terminal
-    filterToggle?.addEventListener('click', () => {
-      const isVisible = filterContainer?.style.display !== 'none';
+    filterToggle?.addEventListener("click", () => {
+      const isVisible = filterContainer?.style.display !== "none";
 
       if (filterContainer) {
-        filterContainer.style.display = isVisible ? 'none' : 'grid';
-        filterToggle.classList.toggle('active');
+        filterContainer.style.display = isVisible ? "none" : "grid";
+        filterToggle.classList.toggle("active");
       }
     });
 
     // Google Analytics Event Tracking
     function trackEvent(eventName, eventParams) {
-      if (typeof gtag !== 'undefined') {
-        gtag('event', eventName, eventParams);
+      if (typeof gtag !== "undefined") {
+        gtag("event", eventName, eventParams);
       }
     }
 
     // Track all clicks with data-event attribute
-    document.addEventListener('click', (e) => {
-      const element = e.target.closest('[data-event]');
+    document.addEventListener("click", (e) => {
+      const element = e.target.closest("[data-event]");
       if (element) {
-        const eventName = element.getAttribute('data-event');
-        const projectName = element.getAttribute('data-project');
+        const eventName = element.getAttribute("data-event");
+        const projectName = element.getAttribute("data-project");
 
         trackEvent(eventName, {
-          event_category: 'project_interaction',
+          event_category: "project_interaction",
           project_name: projectName,
-          event_label: projectName
+          event_label: projectName,
         });
       }
     });
 
     // Handle project filtering
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const filter = button.getAttribute('data-filter');
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.getAttribute("data-filter");
 
         // Track filter usage
-        trackEvent('filter_technology', {
-          event_category: 'project_filtering',
+        trackEvent("filter_technology", {
+          event_category: "project_filtering",
           technology: filter,
-          event_label: filter
+          event_label: filter,
         });
 
         // Update active button
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
+        filterButtons.forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
 
         // Filter projects
-        projectCards.forEach(card => {
-          if (filter === 'all') {
-            card.classList.remove('hidden');
+        projectCards.forEach((card) => {
+          if (filter === "all") {
+            card.classList.remove("hidden");
           } else {
-            const cardTechs = card.getAttribute('data-tech')?.split(',') || [];
+            const cardTechs = card.getAttribute("data-tech")?.split(",") || [];
             if (cardTechs.includes(filter)) {
-              card.classList.remove('hidden');
+              card.classList.remove("hidden");
             } else {
-              card.classList.add('hidden');
+              card.classList.add("hidden");
             }
           }
         });
@@ -936,9 +1017,9 @@ const projects = getAllProjects();
     });
 
     // Handle image gallery buttons
-    imageButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const galleryId = button.getAttribute('data-gallery');
+    imageButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const galleryId = button.getAttribute("data-gallery");
         if (!galleryId) return;
 
         // Call the gallery's open function
@@ -950,19 +1031,19 @@ const projects = getAllProjects();
     });
 
     // Handle explanation modal buttons
-    explanationButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const explanationId = button.getAttribute('data-explanation');
+    explanationButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const explanationId = button.getAttribute("data-explanation");
         if (!explanationId) return;
 
         const modal = document.getElementById(explanationId);
         if (modal) {
           lastFocusedElement = document.activeElement;
-          modal.classList.add('active');
-          document.body.style.overflow = 'hidden';
+          modal.classList.add("active");
+          document.body.style.overflow = "hidden";
 
           // Focus close button for accessibility
-          const closeBtn = modal.querySelector('.modal-close');
+          const closeBtn = modal.querySelector(".modal-close");
           if (closeBtn) {
             setTimeout(() => closeBtn.focus(), 100);
           }
@@ -976,8 +1057,8 @@ const projects = getAllProjects();
     // Handle explanation modal close
     function closeModal(modal) {
       if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
+        modal.classList.remove("active");
+        document.body.style.overflow = "";
 
         // Restore focus to element that opened the modal
         if (lastFocusedElement) {
@@ -987,17 +1068,20 @@ const projects = getAllProjects();
       }
     }
 
-    document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('modal-close') || e.target.classList.contains('modal-overlay')) {
-        const modal = e.target.closest('.explanation-modal');
+    document.addEventListener("click", (e) => {
+      if (
+        e.target.classList.contains("modal-close") ||
+        e.target.classList.contains("modal-overlay")
+      ) {
+        const modal = e.target.closest(".explanation-modal");
         closeModal(modal);
       }
     });
 
     // Handle escape key for explanation modals
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        const activeModal = document.querySelector('.explanation-modal.active');
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        const activeModal = document.querySelector(".explanation-modal.active");
         closeModal(activeModal);
       }
     });
@@ -1005,13 +1089,13 @@ const projects = getAllProjects();
     // Focus trap utility
     function trapFocus(element) {
       const focusableElements = element.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       );
       const firstFocusable = focusableElements[0];
       const lastFocusable = focusableElements[focusableElements.length - 1];
 
-      element.addEventListener('keydown', function(e) {
-        if (e.key !== 'Tab') return;
+      element.addEventListener("keydown", function (e) {
+        if (e.key !== "Tab") return;
 
         if (e.shiftKey) {
           if (document.activeElement === firstFocusable) {

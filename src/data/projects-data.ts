@@ -64,6 +64,9 @@ export interface Project {
     en: string;  // Título en inglés
   };
 
+  //Slug -- Project in details
+  slug?: string;
+
   // DESCRIPCIÓN (Obligatorio)
   // Texto que aparece en la tarjeta del proyecto
   // SOPORTA HTML: Puedes usar <strong>, <br>, <span>, etc.
@@ -153,6 +156,8 @@ export const projectsData: Project[] = [
     title: {
       en: "AlertEYE"
     },
+    slug: "alerteye",
+
     description: {
       // SOPORTA HTML: <strong>, <br>, <span>, etc.
       en: "<strong>Real-time driver monitoring and rewarding system.</strong><br><br>Developed android application for risk detection, instant alerts and reward engine and an IOT hardware device using Arduino sensors to further detect driver behavior. Implemented computer-vision-based drowsiness detection using OpenCV and pre-trained machine learning models."
