@@ -218,7 +218,7 @@ const projects = getAllProjects();
             {/* Título del proyecto (bilingüe) */}
             <h3>
               {project.slug ? (
-                <a href={`${import.meta.env.BASE_URL}projects/${project.slug}`} class="card-link">
+                <a href={`${import.meta.env.BASE_URL}/projects/${project.slug}`} class="card-link">
                   {project.title[lang]}
                 </a>
               ) : (
@@ -317,7 +317,7 @@ const projects = getAllProjects();
               {/* Project in details */}
               {project.slug && (
                 <a
-                  href={`${import.meta.env.BASE_URL}projects/${project.slug}`}
+                  href={`${import.meta.env.BASE_URL}/projects/${project.slug}`}
                   class="mono text-sm border-b border-[var(--text)] hover:opacity-70"
                 >
                   [details]
