@@ -669,6 +669,20 @@ const projects = getAllProjects();
     display: flex;
     flex-direction: column;
     height: 100%;
+    cursor: pointer;
+  }
+
+  .project-card * {
+    cursor: inherit;
+  }
+
+  .project-links {
+    cursor: default;
+  }
+
+  .project-links a,
+  .project-links button {
+    cursor: pointer;
   }
 
   .project-card:hover {
